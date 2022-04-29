@@ -1,9 +1,3 @@
----
-id: index
-title: API Reference Guide
-sidebar_label: Introduction
----
-
 [Elastic Path Commerce Cloud (formerly Moltin)](https://elasticpath.com) is a [headless eCommerce](https://elasticpath.com/headless-commerce) service. You can use the Commerce Cloud API to build unique and flexible shopping experiences for your customers.
 
 :::success
