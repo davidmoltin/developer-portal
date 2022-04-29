@@ -19,6 +19,7 @@ export const theme = {
       light: ({ colors }) => lighten(colors.tonalOffset, colors.primary.main),
       dark: ({ colors }) => darken(colors.tonalOffset, colors.primary.main),
       contrastText: ({ colors }) => readableColor(colors.primary.main),
+      secondary: '#0033cc',
     },
     // success: {
     //   main: '#00aa13',
@@ -46,7 +47,7 @@ export const theme = {
     // },
     text: {
       primary: '#424242',
-      secondary: '#4e566d',
+      secondary: '#0033cc',
     },
     // border: {
     //   dark: 'rgba(0,0,0, 0.15)',
@@ -101,8 +102,8 @@ export const theme = {
   // },
 
   typography: {
-    fontSize: '16px',
-    lineHeight: '1.5em',
+    fontSize: '14px',
+    lineHeight: '1.3em',
     fontWeightRegular: '400',
     fontWeightBold: '600',
     fontWeightLight: '300',
@@ -153,7 +154,7 @@ export const theme = {
       wrap: false,
     },
     links: {
-      color: ({ colors }) => colors.primary.main,
+      color: ({ colors }) => darken(0.4, colors.secondary.main),
       visited: ({ typography }) => typography.links.color,
       hover: ({ typography }) => lighten(0.2, typography.links.color),
     },
