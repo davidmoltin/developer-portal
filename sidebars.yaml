@@ -1,12 +1,92 @@
-Introduction:
+docs:
   - page: docs/index.md
   #- group: Basics
   ##  expanded: false
   #  pages:
   #    - label: Overview
+  - group: Authentication
+    expanded: false
+    pages: 
+      - separator: API
+      - label: Authentication Overview
+        page: docs/api/basics/authentication/index.md
+      - label: Client Credential
+        page: docs/api/basics/authentication/client-credential-token.md
+      - label: Implicit
+        page: docs/api/basics/authentication/implicit-token.md
+      - label: Customer
+        page: docs/api/basics/authentication/customer-token.md
+      - label: Account Management
+        page: docs/api/basics/authentication/account-management-authentication-token.md
+      - label: Permissions
+        page: docs/api/basics/authentication/permissions.md
+  - group: Merchant Admin PCM (NO)
+    expanded: false
+    pages: 
+      - label: More to come
+  - group: Shopper Catalogs (NO)
+    expanded: false
+    pages: 
+      - label: More to come
+  - group: Files
+    expanded: false
+    pages: 
+      - separator: API
+      - label: Files Overview
+        page: docs/api/advanced/files/index.md
+      - label: Get all Files
+        page: docs/api/advanced/files/get-all-files.md
+      - label: Get a File
+        page: docs/api/advanced/files/get-a-file.md
+      - label: Create a File
+        page: docs/api/advanced/files/create-a-file.md
+      - label: Delete a File
+        page: docs/api/advanced/files/delete-a-file.md
+  - group: Inventories
+    expanded: false
+    pages: 
+      - label: Inventories Concept
+        page: docs/concepts/inventory.md
+      - separator: API
+      - label: Overview
+        page: docs/api/inventory/index.md
+      - label: Create Inventory
+        page: docs/api/inventory/create-inventory.md
+      - label: Get all Inventory
+        page: docs/api/inventory/get-all-inventory.md
+      - label: Get a Product's Stock
+        page: docs/api/inventory/get-a-product-stock.md
+      - label: Get a Product's Stock Transactions
+        page: docs/api/inventory/get-a-product-stock-transactions.md
+      - label: Get Single Stock Transaction
+        page: docs/api/inventory/get-a-product-stock-transaction.md
+      - label: Get Multiple Stocks
+        page: docs/api/inventory/get-multiple-stocks.md
+      - label: Update Inventory
+        page: docs/api/inventory/update-inventory.md
+      - label: Delete Inventory
+        page: docs/api/inventory/delete-inventory.md
+  - group: Payments (NO)
+    expanded: false
+    pages: 
+      - label: Auth
+      
+  - group: Carts and Orders (NO)
+    expanded: false
+    pages: 
+      - label: Auth
+     
+  - group: Customers and Accounts (NO)
+    expanded: false
+    pages: 
+      - label: Auth
+       
   - group: Promotions
     expanded: false
     pages:
+      - label: Promotions Concept
+        page: docs/concepts/promotions.md
+      - separator: API
       - label: Overview
         page: docs/api/promotions/index.md
       - group: Promotion Management
@@ -38,3 +118,68 @@ Introduction:
           page: docs/api/promotions/delete-a-promotion.md
         - label: Get Promotion History
           page: docs/api/promotions/get-promotion-history.md
+      - group: Promotion Codes
+        expanded: false
+        pages:
+        - label: Get Promotion Codes
+          page: docs/api/promotions/get-promotion-codes.md
+        - label: Create Promotion Codes
+          page: docs/api/promotions/create-promotion-codes.md
+        - label: Delete Promotion Codes
+          page: docs/api/promotions/delete-promotion-codes.md
+      - separator: Commerce Manager
+      - group: Promotion Management
+        expanded: fasle
+        pages:
+        - label: Promotions
+          page: docs/dashboard/promotions/promotions.md
+        - label: Item Level Promotions
+          page: docs/dashboard/promotions/create-item-level-promotions.md
+        - label: Cart-level Promotions
+          page: docs/dashboard/promotions/create-cart-level-promotions.md
+  - group: Internationalization (NO)
+    expanded: false
+    pages: 
+      - label: Auth
+  - group: Integrations (NO)
+    expanded: false
+    pages: 
+      - label: Auth
+  - group: Custom Data (Flows) (NO)
+    expanded: false
+    pages: 
+      - label: Auth
+  - group: Single Sign-On (NO)
+    expanded: false
+    pages: 
+      - label: Auth
+  - group: Settings (NO)
+    expanded: false
+    pages: 
+      - label: Auth
+  - separator: Legacy APIs
+  - group: Catalog (Legacy) (NO)
+    expanded: false
+    pages:
+      - group: Internationalization (Legacy) (NO)
+        expanded: false
+        pages: 
+          - label: Auth
+      - group: Products (Legacy) (NO)
+        expanded: false
+        pages: 
+          - label: Auth
+      - group: Child Products (Legacy) (NO)
+        expanded: false
+        pages: 
+          - label: Auth
+      - group: Categories (Legacy) (NO)
+        expanded: false
+        pages: 
+          - label: Auth
+
+alternative:
+  - page: docs/changelog.md
+    label: Changlog
+  - page: docs/index.md
+    label: Back to Reference Documentation
