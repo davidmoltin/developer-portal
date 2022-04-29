@@ -1,0 +1,59 @@
+---
+id: delete-inventory
+title: Delete Inventory
+sidebar_label: Delete Inventory
+---
+
+:::important Product Content Management Only
+This endpoint works only with products that are created with the PCM Products API.
+:::
+
+
+## `DELETE` Inventory
+
+```http
+https://api.moltin.com/v2/inventories/:productId
+```
+
+Deletes the inventory for the specified product. The product inventory is null and is no longer managed by Elastic Path Commerce Cloud.
+
+:::tip
+If you want to keep managing inventory but have none of the product in stock, set the inventory to `0` instead of deleting the inventory.
+:::
+
+<!--DOCUSAURUS_CODE_TABS-->
+
+<!-- Request -->
+
+**Path Parameters**:
+
+| Name | Required | Type | Description |
+| :--- | :--- | :--- | :--- |
+| `productId` | Required | `string` | The unique identifier of the product. |
+
+**Headers**:
+
+| Name | Required | Type | Description |
+| :--- | :--- | :--- | :--- |
+| `Authorization` | Required | `string` | The Bearer token to grant access to the API. |
+
+<!-- Response -->
+
+`204 No Content`
+
+```json
+
+```
+
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+<!--DOCUSAURUS_CODE_TABS-->
+
+<!--cURL-->
+
+```bash
+curl -X POST https://api.moltin.com/v2/inventories/f5bd4e59-a95f-4bda-bfe6-0f34f47ac94b \
+     -H "Authorization: Bearer XXXX" \
+```
+
+<!--END_DOCUSAURUS_CODE_TABS-->

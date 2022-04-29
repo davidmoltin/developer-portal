@@ -27,17 +27,17 @@ stylesheets:
 #  - ./static/intercom.js
 nav:
 
-  - label: Training exercises
-    page: developer-portal/index.md
+  - label: Reference Documentation
+    page: docs/index.md
 
-  - label: External docs
+  - label: Changelog
     icon: ./images/redocly-icon-white.png
-    href: https://redoc.ly/docs/developer-portal/introduction/
+    page: docs/changelog.md
 
   - search: true
 
 footer:
-  copyrightText: Copyright © Redocly 2019-2021. All right reserved.
+  copyrightText: Copyright © Elastic Path 2019-2021. All right reserved.
   columns:
     - group: Legal
       items:

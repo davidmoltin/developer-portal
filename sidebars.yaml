@@ -1,37 +1,40 @@
 Introduction:
-  - page: developer-portal/index.md
-  - group: Advanced
+  - page: docs/index.md
+  #- group: Basics
+  ##  expanded: false
+  #  pages:
+  #    - label: Overview
   - group: Promotions
     expanded: false
     pages:
       - label: Overview
-        page: developer-portal/promotions/index.md
+        page: docs/api/promotions/index.md
       - group: Promotion Management
         expanded: false
         pages:
         - label: Create a Cart Fixed Discount Promotion
-          page: developer-portal/promotions/create-a-cart-fixed-discount-promotion.md
+          page: docs/api/promotions/create-a-cart-fixed-discount-promotion.md
         - label: Create a Cart Percent Discount Promotion
-          page: developer-portal/promotions/create-a-cart-percent-discount-promotion.md
+          page: docs/api/promotions/create-a-cart-percent-discount-promotion.md
         - label: Create X for Y Discount Promotion
-          page: developer-portal/promotions/create-X-for-Y-discount-promotion.md
+          page: docs/api/promotions/create-X-for-Y-discount-promotion.md
         - label: Create X for Amount Discount Promotion
-          page: developer-portal/promotions/create-X-for-amount-discount-promotion.md
+          page: docs/api/promotions/create-X-for-amount-discount-promotion.md
         - label: Create Fixed Bundle Discount Promotion
-          page: developer-portal/promotions/create-fixed-bundle-discount-promotion.md
+          page: docs/api/promotions/create-fixed-bundle-discount-promotion.md
         - label: Create Fixed Discount Promotion for Items
-          page: developer-portal/promotions/create-item-fixed-discount-promotion.md
+          page: docs/api/promotions/create-item-fixed-discount-promotion.md
         - label: Craete Item Percent Discount Promotion
-          page: developer-portal/promotions/create-item-fixed-discount-promotion.md
+          page: docs/api/promotions/create-item-fixed-discount-promotion.md
         - label: Create a Free Gift Promotion
-          page: developer-portal/promotions/create-free-gift-promotion.md
+          page: docs/api/promotions/create-free-gift-promotion.md
         - label: Get all Promotions
-          page: developer-portal/promotions/get-all-promotions.md
+          page: docs/api/promotions/get-all-promotions.md
         - label: Get a Promotion
-          page: developer-portal/promotions/get-a-promotion.md
+          page: docs/api/promotions/get-a-promotion.md
         - label: Update Promotion
-          page: developer-portal/promotions/update-promotions.md
+          page: docs/api/promotions/update-promotions.md
         - label: Delete a Promotion
-          page: developer-portal/promotions/delete-a-promotion.md
+          page: docs/api/promotions/delete-a-promotion.md
         - label: Get Promotion History
-          page: developer-portal/promotions/get-promotion-history.md
+          page: docs/api/promotions/get-promotion-history.md
