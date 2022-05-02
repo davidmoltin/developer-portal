@@ -12,10 +12,18 @@ export const theme = {
   //   medium: '900px',
   //   large: '1200px',
   // },
+breakpoints: {
+    xs: 0,
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px',
+    xxl: '1400px',
+},
   colors: {
-    // tonalOffset: 0.2,
+    //tonalOffset: 0.2,
     primary: {
-      main: '#091740',
+      main: '#0033cc',
       light: ({ colors }) => lighten(colors.tonalOffset, colors.primary.main),
       dark: ({ colors }) => darken(colors.tonalOffset, colors.primary.main),
       contrastText: ({ colors }) => readableColor(colors.primary.main),

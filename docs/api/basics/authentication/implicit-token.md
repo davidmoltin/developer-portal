@@ -24,9 +24,9 @@ https://api.moltin.com/oauth/access_token
 
 **Form Data Parameters**:
 
-| Name | Required | Type | Description |
-| --- | --- | --- | --- |
-| `client_id` | Required | `string` | Your **client_id** |
+| Name         | Required | Type     | Description                                          |
+| ---          | ---      | ---      | ---                                                  |
+| `client_id`  | Required | `string` | Your **client_id**                                   |
 | `grant_type` | Required | `string` | The grant type, in this case it must be **implicit** |
 
 

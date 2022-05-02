@@ -24,10 +24,10 @@ docs:
     expanded: false
     pages: 
       - label: More to come
-  - group: Shopper Catalogs (NO)
+  - group: Shopper Catalogs
     expanded: false
-    pages: 
-      - label: More to come
+    pages:
+      - page: openapi/catalog-view.json/*
   - group: Files
     expanded: false
     pages: 

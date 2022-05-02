@@ -1,0 +1,6067 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "Catalog-view Service API",
+    "description": "API for catalog-view functionality.",
+    "version": "0.1"
+  },
+  "paths": {
+    "/pcm/catalogs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "catalogs"
+        ],
+        "summary": "Gets all authorized catalogs.",
+        "operationId": "getCatalogs",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of catalogs.",
+            "schema": {
+              "$ref": "#/definitions/catalog-list-data"
+            }
+          },
+          "default": {
+            "description": "An unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      },
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "catalogs"
+        ],
+        "summary": "Creates a new catalog.",
+        "operationId": "createCatalog",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "description": "The catalog to create.",
+            "name": "catalog",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/catalog-create-data"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The created catalog",
+            "schema": {
+              "$ref": "#/definitions/catalog-data"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "catalogs"
+        ],
+        "summary": "Get a catalog by ID.",
+        "operationId": "getCatalogByID",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The catalog.",
+            "schema": {
+              "$ref": "#/definitions/catalog-data"
+            }
+          },
+          "default": {
+            "description": "An unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      },
+      "put": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "catalogs"
+        ],
+        "summary": "Updates a catalog.",
+        "operationId": "updateCatalog",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Updated catalog.",
+            "name": "catalog",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/catalog-update-data"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated catalog response.",
+            "schema": {
+              "$ref": "#/definitions/catalog-data"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      },
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "catalogs"
+        ],
+        "summary": "Deletes a catalog only when the catalog is not published or its release has been deleted.",
+        "operationId": "deleteCatalogByID",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "A 204 response indicates that the catalog has been deleted."
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "releases"
+        ],
+        "summary": "Gets all authorized catalog releases.",
+        "operationId": "getReleases",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of catalogs.",
+            "schema": {
+              "$ref": "#/definitions/release-list-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      },
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "releases"
+        ],
+        "summary": "Publishes a catalog.",
+        "operationId": "publishRelease",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Publish action summary.",
+            "schema": {
+              "$ref": "#/definitions/release-data"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      },
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "releases"
+        ],
+        "summary": "Deletes all releases.",
+        "operationId": "deleteReleases",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "A 204 response indicates that the releases have been deleted."
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "releases"
+        ],
+        "summary": "Get a catalog release by ID.",
+        "operationId": "getReleaseByID",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The catalog.",
+            "schema": {
+              "$ref": "#/definitions/release-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      },
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "releases"
+        ],
+        "summary": "Deletes a release.",
+        "operationId": "deleteReleaseByID",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "A 204 response indicates that the release has been deleted."
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/diff/products": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "releases"
+        ],
+        "summary": "Get a list of differences between two releases.",
+        "operationId": "getProductDiff",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/other"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The catalog.",
+            "schema": {
+              "$ref": "#/definitions/diff-list-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/rules": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "rules"
+        ],
+        "summary": "Gets all authorized catalog rules.",
+        "operationId": "getRules",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of catalog rules.",
+            "schema": {
+              "$ref": "#/definitions/rule-list-data"
+            }
+          },
+          "default": {
+            "description": "An unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      },
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "rules"
+        ],
+        "summary": "Creates a new catalog rule.",
+        "operationId": "createRule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "description": "The catalog rule to create.",
+            "name": "rule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/rule-create-data"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The created catalog rule",
+            "schema": {
+              "$ref": "#/definitions/rule-data"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/rules/{catalog_rule_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "rules"
+        ],
+        "summary": "Get a catalog rule by ID.",
+        "operationId": "getRuleByID",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog rule ID.",
+            "name": "catalog_rule_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The catalog rile.",
+            "schema": {
+              "$ref": "#/definitions/rule-data"
+            }
+          },
+          "default": {
+            "description": "An unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      },
+      "put": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "rules"
+        ],
+        "summary": "Updates a catalogRule.",
+        "operationId": "updateRule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog rule ID.",
+            "name": "catalog_rule_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Updated catalog rule.",
+            "name": "rule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/rule-update-data"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated catalog rule response.",
+            "schema": {
+              "$ref": "#/definitions/rule-data"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      },
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "rules"
+        ],
+        "summary": "Deletes a catalog rule.",
+        "operationId": "deleteRuleByID",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog rule ID.",
+            "name": "catalog_rule_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "A 204 response indicates that the catalog rule has been deleted."
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "releases"
+        ],
+        "summary": "Get the catalog release.",
+        "operationId": "getByContextRelease",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The catalog.",
+            "schema": {
+              "$ref": "#/definitions/release-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/hierarchies": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hierarchies"
+        ],
+        "summary": "Get all hierarchies in a catalog release.",
+        "operationId": "getAllHierarchies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The hierarchies of a catalog.",
+            "schema": {
+              "$ref": "#/definitions/hierarchy-list-data"
+            }
+          },
+          "default": {
+            "description": "An unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/hierarchies/{hierarchy_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hierarchies"
+        ],
+        "summary": "Get a specific hierarchy in a catalog release.",
+        "operationId": "getHierarchy",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog hierarchy ID.",
+            "name": "hierarchy_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The catalog hierarchy.",
+            "schema": {
+              "$ref": "#/definitions/hierarchy-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/hierarchies/{hierarchy_id}/nodes": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hierarchies"
+        ],
+        "summary": "Get all of a hierarchy's nodes.",
+        "operationId": "getHierarchyNodes",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog hierarchy ID.",
+            "name": "hierarchy_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The child nodes of a catalog hierarchy.",
+            "schema": {
+              "$ref": "#/definitions/node-list-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/hierarchies/{hierarchy_id}/children": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hierarchies"
+        ],
+        "summary": "Get child nodes.",
+        "operationId": "getHierarchyChildNodes",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog hierarchy ID.",
+            "name": "hierarchy_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The child nodes of a catalog hierarchy.",
+            "schema": {
+              "$ref": "#/definitions/node-list-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/hierarchies/{hierarchy_id}/products": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Get hierarchy products.",
+        "operationId": "getProductsForHierarchy",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog hierarchy ID.",
+            "name": "hierarchy_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/currency-thousand-separator"
+          },
+          {
+            "$ref": "#/parameters/currency-format"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-point"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-place"
+          },
+          {
+            "$ref": "#/parameters/currency-code"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The products of a catalog hierarchy.",
+            "schema": {
+              "$ref": "#/definitions/product-list-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/nodes": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "nodes"
+        ],
+        "summary": "Get all nodes in a catalog release.",
+        "operationId": "getAllNodes",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The nodes of a catalog.",
+            "schema": {
+              "$ref": "#/definitions/node-list-data"
+            }
+          },
+          "default": {
+            "description": "An unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/hierarchies": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hierarchies"
+        ],
+        "summary": "Get all hierarchies in a catalog release.",
+        "operationId": "getByContextAllHierarchies",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The hierarchies of the catalog.",
+            "schema": {
+              "$ref": "#/definitions/hierarchy-list-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/hierarchies/{hierarchy_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hierarchies"
+        ],
+        "summary": "Get a specific hierarchy in the catalog release.",
+        "operationId": "getByContextHierarchy",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "type": "string",
+            "description": "The catalog hierarchy ID.",
+            "name": "hierarchy_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The catalog hierarchy.",
+            "schema": {
+              "$ref": "#/definitions/hierarchy-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/hierarchies/{hierarchy_id}/nodes": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hierarchies"
+        ],
+        "summary": "Get all of a hierarchy's nodes.",
+        "operationId": "getByContextHierarchyNodes",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "type": "string",
+            "description": "The catalog hierarchy ID.",
+            "name": "hierarchy_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The child nodes of a catalog hierarchy.",
+            "schema": {
+              "$ref": "#/definitions/node-list-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/hierarchies/{hierarchy_id}/children": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "hierarchies"
+        ],
+        "summary": "Get child nodes.",
+        "operationId": "getByContextHierarchyChildNodes",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "type": "string",
+            "description": "The catalog hierarchy ID.",
+            "name": "hierarchy_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The child nodes of a catalog hierarchy.",
+            "schema": {
+              "$ref": "#/definitions/node-list-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/hierarchies/{hierarchy_id}/products": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Get hierarchy products.",
+        "operationId": "getByContextProductsForHierarchy",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/currency-thousand-separator"
+          },
+          {
+            "$ref": "#/parameters/currency-format"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-point"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-place"
+          },
+          {
+            "$ref": "#/parameters/currency-code"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "type": "string",
+            "description": "The catalog hierarchy ID.",
+            "name": "hierarchy_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The products of a catalog hierarchy.",
+            "schema": {
+              "$ref": "#/definitions/product-list-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/nodes": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "nodes"
+        ],
+        "summary": "Get all nodes in a catalog release.",
+        "operationId": "getByContextAllNodes",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The nodes of the catalog.",
+            "schema": {
+              "$ref": "#/definitions/node-list-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/nodes/{node_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "nodes"
+        ],
+        "summary": "Get a specific node in a catalog release.",
+        "operationId": "getNode",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog node ID.",
+            "name": "node_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The catalog node.",
+            "schema": {
+              "$ref": "#/definitions/node-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/nodes/{node_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "nodes"
+        ],
+        "summary": "Get a specific node in the catalog release.",
+        "operationId": "getByContextNode",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "type": "string",
+            "description": "The catalog node ID.",
+            "name": "node_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The catalog node.",
+            "schema": {
+              "$ref": "#/definitions/node-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/nodes/{node_id}/relationships/products": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Get products attached to a specific node.",
+        "operationId": "getProductsForNode",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/currency-thousand-separator"
+          },
+          {
+            "$ref": "#/parameters/currency-format"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-point"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-place"
+          },
+          {
+            "$ref": "#/parameters/currency-code"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog node ID.",
+            "name": "node_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The products of a catalog node.",
+            "schema": {
+              "$ref": "#/definitions/product-list-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/nodes/{node_id}/relationships/products": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Get products attached to a specific node.",
+        "operationId": "getByContextProductsForNode",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/currency-thousand-separator"
+          },
+          {
+            "$ref": "#/parameters/currency-format"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-point"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-place"
+          },
+          {
+            "$ref": "#/parameters/currency-code"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "type": "string",
+            "description": "The catalog node ID.",
+            "name": "node_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The products of a catalog node.",
+            "schema": {
+              "$ref": "#/definitions/product-list-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/products": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Get all products in a catalog release.",
+        "operationId": "getAllProducts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/bulk-product-ids"
+          },
+          {
+            "$ref": "#/parameters/bulk-product-skus"
+          },
+          {
+            "$ref": "#/parameters/internal-bulk-product-ids"
+          },
+          {
+            "$ref": "#/parameters/internal-bulk-product-skus"
+          },
+          {
+            "$ref": "#/parameters/currency-thousand-separator"
+          },
+          {
+            "$ref": "#/parameters/currency-format"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-point"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-place"
+          },
+          {
+            "$ref": "#/parameters/currency-code"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The products of a catalog.",
+            "schema": {
+              "$ref": "#/definitions/product-list-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/products": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Get all products in the catalog release.",
+        "operationId": "getByContextAllProducts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/bulk-product-ids"
+          },
+          {
+            "$ref": "#/parameters/bulk-product-skus"
+          },
+          {
+            "$ref": "#/parameters/internal-bulk-product-ids"
+          },
+          {
+            "$ref": "#/parameters/internal-bulk-product-skus"
+          },
+          {
+            "$ref": "#/parameters/currency-thousand-separator"
+          },
+          {
+            "$ref": "#/parameters/currency-format"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-point"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-place"
+          },
+          {
+            "$ref": "#/parameters/currency-code"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The products of a catalog.",
+            "schema": {
+              "$ref": "#/definitions/product-list-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/products/{product_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Get a product in a catalog release.",
+        "operationId": "getProduct",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/currency-thousand-separator"
+          },
+          {
+            "$ref": "#/parameters/currency-format"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-point"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-place"
+          },
+          {
+            "$ref": "#/parameters/currency-code"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The product ID.",
+            "name": "product_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The product of a catalog.",
+            "schema": {
+              "$ref": "#/definitions/product-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/products/{product_id}/relationships/component_products": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Get component product IDs of a specific bundle product from a catalog release.",
+        "operationId": "getComponentProductIDs",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The product ID.",
+            "name": "product_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of component product IDs of a specific bundle product from a catalog.",
+            "schema": {
+              "$ref": "#/definitions/product-reference-list-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/products/{product_id}/configure": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Configure a bundle product in a catalog release.",
+        "operationId": "configureProduct",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/currency-thousand-separator"
+          },
+          {
+            "$ref": "#/parameters/currency-format"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-point"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-place"
+          },
+          {
+            "$ref": "#/parameters/currency-code"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The product ID.",
+            "name": "product_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "The bundle configuration.",
+            "name": "bundle_configuration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/bundle-configuration-data"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The configured product of a catalog.",
+            "schema": {
+              "$ref": "#/definitions/product-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/products/products_for_cart": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Retrieve a list of products to be added to cart in a catalog release.",
+        "operationId": "productsForCart",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/currency-thousand-separator"
+          },
+          {
+            "$ref": "#/parameters/currency-format"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-point"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-place"
+          },
+          {
+            "$ref": "#/parameters/currency-code"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "A list of product id or sku and bundle configuration for cart.",
+            "name": "products_for_cart_configuration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/products-for-cart-configuration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of products to be added to cart.",
+            "schema": {
+              "$ref": "#/definitions/products-for-cart"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/products/{product_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Get a product in the catalog release.",
+        "operationId": "getByContextProduct",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "$ref": "#/parameters/currency-thousand-separator"
+          },
+          {
+            "$ref": "#/parameters/currency-format"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-point"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-place"
+          },
+          {
+            "$ref": "#/parameters/currency-code"
+          },
+          {
+            "type": "string",
+            "description": "The product ID.",
+            "name": "product_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The product of a catalog.",
+            "schema": {
+              "$ref": "#/definitions/product-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/products/{product_id}/relationships/component_products": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Get a list of component product IDs for a specific bundle product in the catalog release.",
+        "operationId": "getByContextComponentProductIDs",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "type": "string",
+            "description": "The product ID.",
+            "name": "product_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of component product IDs of a bundle product from a catalog.",
+            "schema": {
+              "$ref": "#/definitions/product-reference-list-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/products/{product_id}/configure": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Configure a bundle product in the catalog release.",
+        "operationId": "configureByContextProduct",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "$ref": "#/parameters/currency-thousand-separator"
+          },
+          {
+            "$ref": "#/parameters/currency-format"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-point"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-place"
+          },
+          {
+            "$ref": "#/parameters/currency-code"
+          },
+          {
+            "type": "string",
+            "description": "The product ID.",
+            "name": "product_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "The bundle configuration.",
+            "name": "bundle_configuration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/bundle-configuration-data"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The configured product of a catalog.",
+            "schema": {
+              "$ref": "#/definitions/product-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/products/products_for_cart": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "products"
+        ],
+        "summary": "Retrieve a list of products to be added to cart in a catalog release.",
+        "operationId": "productsForCartByContext",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "$ref": "#/parameters/currency-thousand-separator"
+          },
+          {
+            "$ref": "#/parameters/currency-format"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-point"
+          },
+          {
+            "$ref": "#/parameters/currency-decimal-place"
+          },
+          {
+            "$ref": "#/parameters/currency-code"
+          },
+          {
+            "description": "A list of product id or sku and bundle configuration for cart.",
+            "name": "products_for_cart_configuration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/products-for-cart-configuration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of products to be added to cart.",
+            "schema": {
+              "$ref": "#/definitions/products-for-cart"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalogs/{catalog_id}/releases/{release_id}/nodes/{node_id}/relationships/children": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "nodes"
+        ],
+        "summary": "Get child nodes.",
+        "operationId": "getChildNodes",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "type": "string",
+            "description": "The catalog ID.",
+            "name": "catalog_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog release ID.",
+            "name": "release_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "The catalog node ID.",
+            "name": "node_id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The child nodes of a catalog node.",
+            "schema": {
+              "$ref": "#/definitions/node-list-data"
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    },
+    "/pcm/catalog/nodes/{node_id}/relationships/children": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "nodes"
+        ],
+        "summary": "Get child nodes.",
+        "operationId": "getByContextChildNodes",
+        "parameters": [
+          {
+            "$ref": "#/parameters/auth-store"
+          },
+          {
+            "$ref": "#/parameters/request-id"
+          },
+          {
+            "$ref": "#/parameters/settings-page-length"
+          },
+          {
+            "$ref": "#/parameters/catalog-id"
+          },
+          {
+            "$ref": "#/parameters/channel"
+          },
+          {
+            "$ref": "#/parameters/account-id"
+          },
+          {
+            "$ref": "#/parameters/account-ids"
+          },
+          {
+            "$ref": "#/parameters/customer-id"
+          },
+          {
+            "$ref": "#/parameters/tag"
+          },
+          {
+            "$ref": "#/parameters/language-code"
+          },
+          {
+            "$ref": "#/parameters/accept-language"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "type": "string",
+            "description": "The catalog node ID.",
+            "name": "node_id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The child nodes of a catalog node.",
+            "schema": {
+              "$ref": "#/definitions/node-list-data"
+            },
+            "headers": {
+              "Surrogate-Control": {
+                "type": "string"
+              },
+              "Vary": {
+                "type": "string"
+              },
+              "Surrogate-Key": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/error-response"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "auth-store": {
+      "in": "header",
+      "name": "X-Moltin-Auth-Store",
+      "type": "string",
+      "format": "uuid",
+      "required": true
+    },
+    "request-id": {
+      "in": "header",
+      "name": "X-Request-ID",
+      "type": "string",
+      "required": false
+    },
+    "settings-page-length": {
+      "in": "header",
+      "name": "X-Moltin-Settings-Page_Length",
+      "type": "integer",
+      "required": false
+    },
+    "catalog-id": {
+      "in": "header",
+      "name": "X-Moltin-Catalog-Id",
+      "type": "string",
+      "format": "uuid",
+      "required": false
+    },
+    "account-id": {
+      "in": "header",
+      "name": "EP-Internal-Account-Id",
+      "type": "string",
+      "required": false
+    },
+    "account-ids": {
+      "in": "header",
+      "name": "EP-Internal-Parent-Account-Ids",
+      "type": "string",
+      "required": false
+    },
+    "customer-id": {
+      "in": "header",
+      "name": "X-Moltin-Customer-Id",
+      "type": "string",
+      "required": false
+    },
+    "channel": {
+      "in": "header",
+      "name": "EP-Channel",
+      "type": "string",
+      "required": false
+    },
+    "currency-code": {
+      "in": "header",
+      "name": "x-moltin-currency-code",
+      "type": "string",
+      "required": false
+    },
+    "currency-decimal-place": {
+      "in": "header",
+      "name": "x-moltin-currency-decimal-place",
+      "type": "string",
+      "required": false
+    },
+    "currency-decimal-point": {
+      "in": "header",
+      "name": "x-moltin-currency-decimal-point",
+      "type": "string",
+      "required": false
+    },
+    "currency-format": {
+      "in": "header",
+      "name": "x-moltin-currency-format",
+      "type": "string",
+      "required": false
+    },
+    "currency-thousand-separator": {
+      "in": "header",
+      "name": "x-moltin-currency-thousand-separator",
+      "type": "string",
+      "required": false
+    },
+    "accept-language": {
+      "in": "header",
+      "name": "accept-language",
+      "type": "string",
+      "required": false
+    },
+    "language-code": {
+      "in": "header",
+      "name": "x-moltin-language",
+      "type": "string",
+      "required": false
+    },
+    "tag": {
+      "in": "header",
+      "name": "EP-Context-Tag",
+      "type": "string",
+      "required": false
+    },
+    "limit": {
+      "name": "page[limit]",
+      "in": "query",
+      "description": "Number of nodes per page.",
+      "required": false,
+      "minimum": 1,
+      "type": "integer",
+      "format": "int64"
+    },
+    "offset": {
+      "name": "page[offset]",
+      "in": "query",
+      "description": "Offset of first node on page.",
+      "required": false,
+      "minimum": 0,
+      "format": "int64",
+      "type": "integer"
+    },
+    "other": {
+      "name": "other",
+      "in": "query",
+      "description": "Release ID to compare to.",
+      "required": true,
+      "type": "string"
+    },
+    "filter": {
+      "name": "filter",
+      "in": "query",
+      "description": "A filter specification",
+      "required": false,
+      "type": "string"
+    },
+    "bulk-product-ids": {
+      "in": "header",
+      "name": "EP-Product-Ids",
+      "type": "string",
+      "required": false
+    },
+    "bulk-product-skus": {
+      "in": "header",
+      "name": "EP-Product-Skus",
+      "type": "string",
+      "required": false
+    },
+    "internal-bulk-product-ids": {
+      "in": "header",
+      "name": "EP-Internal-Product-Ids",
+      "type": "string",
+      "required": false
+    },
+    "internal-bulk-product-skus": {
+      "in": "header",
+      "name": "EP-Internal-Product-Skus",
+      "type": "string",
+      "required": false
+    }
+  },
+  "definitions": {
+    "amount": {
+      "type": "object",
+      "title": "Amount",
+      "description": "A current specific price for a product.",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "example": 100,
+          "format": "int64",
+          "x-omitempty": false,
+          "x-go-name": "Amount"
+        },
+        "includes_tax": {
+          "type": "boolean",
+          "example": false,
+          "default": false,
+          "x-go-name": "IncludesTax"
+        }
+      },
+      "x-go-name": "PriceAmount"
+    },
+    "prioritized-pricebooks": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "priority": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "priority",
+          "id"
+        ],
+        "x-go-name": "PrioritizedPricebook"
+      }
+    },
+    "catalog": {
+      "type": "object",
+      "title": "Catalog",
+      "description": "A catalog combines pricebooks, product lists, and hierarchies.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The catalog ID. Use this to modify the catalog's catalog, or to retrieve the catalog produced by this catalog.",
+          "example": "8dbb35b2-ef04-477e-974d-e5f3abe6faae"
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "catalog-123"
+            },
+            "description": {
+              "type": "string",
+              "example": "Catalog for Store 123",
+              "default": ""
+            },
+            "hierarchy_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pricebook_id": {
+              "type": "string"
+            },
+            "pricebook_ids": {
+              "$ref": "#/definitions/prioritized-pricebooks",
+              "x-go-name": "PricebookIDs"
+            },
+            "locales": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "created_at": {
+              "type": "string",
+              "example": "2020-09-22T09:00:00",
+              "format": "date-time"
+            },
+            "updated_at": {
+              "type": "string",
+              "example": "2020-09-22T09:00:00",
+              "format": "date-time"
+            }
+          },
+          "required": [
+            "name",
+            "hierarchy_ids",
+            "created_at",
+            "updated_at"
+          ]
+        },
+        "relationships": {
+          "type": "object",
+          "title": "CatalogRelationships",
+          "description": "Relationships to rules",
+          "properties": {
+            "rules": {
+              "type": "object",
+              "properties": {
+                "links": {
+                  "$ref": "#/definitions/related-link"
+                }
+              }
+            },
+            "releases": {
+              "type": "object",
+              "properties": {
+                "links": {
+                  "$ref": "#/definitions/related-link"
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "example": "catalog",
+          "enum": [
+            "catalog"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "attributes"
+      ]
+    },
+    "catalog-create-data": {
+      "type": "object",
+      "title": "CatalogCreateData",
+      "description": "A catalog combines pricebooks, product lists, and hierarchies.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "example": "catalog-123"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Catalog for Store 123",
+                  "x-nullable": true
+                },
+                "hierarchy_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "pricebook_id": {
+                  "type": "string"
+                },
+                "pricebook_ids": {
+                  "$ref": "#/definitions/prioritized-pricebooks",
+                  "x-go-name": "PricebookIDs"
+                },
+                "locales": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "name",
+                "hierarchy_ids"
+              ]
+            },
+            "type": {
+              "type": "string",
+              "example": "catalog",
+              "enum": [
+                "catalog"
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "attributes"
+          ]
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "catalog-data": {
+      "type": "object",
+      "title": "CatalogData",
+      "description": "Container for a single catalog.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/catalog"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "catalog-list-data": {
+      "type": "object",
+      "title": "CatalogListData",
+      "description": "Container for a list of catalogs.",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/catalog"
+          }
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "catalog-update-data": {
+      "type": "object",
+      "title": "CatalogUpdateData",
+      "description": "A catalog combines pricebooks, product lists, and hierarchies.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "example": "catalog-123",
+                  "x-nullable": true
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Catalog for Store 123",
+                  "x-nullable": true
+                },
+                "hierarchy_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "x-nullable": true
+                },
+                "pricebook_id": {
+                  "type": "string",
+                  "x-nullable": true
+                },
+                "pricebook_ids": {
+                  "$ref": "#/definitions/prioritized-pricebooks",
+                  "x-go-name": "PricebookIDs",
+                  "x-nullable": true
+                },
+                "locales": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "id": {
+              "type": "string",
+              "x-go-name": "ID",
+              "example": "8dbb35b2-ef04-477e-974d-e5f3abe6faae"
+            },
+            "type": {
+              "type": "string",
+              "example": "catalog",
+              "enum": [
+                "catalog"
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "attributes"
+          ]
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "component-product": {
+      "type": "object",
+      "title": "Component Product",
+      "description": "A component product definition for a bundle product.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "min": {
+          "type": "integer",
+          "x-nullable": true,
+          "x-go-name": "Min"
+        },
+        "max": {
+          "type": "integer",
+          "x-nullable": true,
+          "x-go-name": "Max"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/component-product-option"
+          },
+          "x-go-name": "Options"
+        }
+      }
+    },
+    "component-product-option": {
+      "type": "object",
+      "title": "Component Product Option",
+      "description": "A component product option for a bundle product.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type",
+          "default": "product",
+          "example": "product",
+          "enum": [
+            "product"
+          ]
+        },
+        "quantity": {
+          "type": "integer",
+          "example": 2,
+          "x-go-name": "Quantity"
+        }
+      }
+    },
+    "components": {
+      "type": "object",
+      "title": "Components",
+      "description": "Collection of products for a bundle product.",
+      "additionalProperties": {
+        "$ref": "#/definitions/component-product"
+      }
+    },
+    "currencies": {
+      "type": "object",
+      "title": "Currencies",
+      "description": "Collection of currency specific prices for a product.",
+      "additionalProperties": {
+        "$ref": "#/definitions/amount"
+      }
+    },
+    "diff-list-data": {
+      "type": "object",
+      "title": "DiffListData",
+      "description": "A list of differences between two releases.",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/product-diff"
+          }
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "display-price": {
+      "type": "object",
+      "x-omitempty": true,
+      "properties": {
+        "with_tax": {
+          "$ref": "#/definitions/formatted-price"
+        },
+        "without_tax": {
+          "$ref": "#/definitions/formatted-price"
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "title": "APIError",
+      "description": "APIError is a json-api style part of an error response.",
+      "properties": {
+        "detail": {
+          "type": "string",
+          "x-go-name": "Detail"
+        },
+        "status": {
+          "type": "string",
+          "x-go-name": "Status"
+        },
+        "title": {
+          "type": "string",
+          "x-go-name": "Title"
+        }
+      },
+      "x-go-name": "APIError"
+    },
+    "error-response": {
+      "type": "object",
+      "title": "ErrorResponse",
+      "description": "ErrorResponse is a json-api style Error response.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/error"
+          },
+          "x-go-name": "Errors"
+        }
+      },
+      "x-go-name": "ErrorResponse"
+    },
+    "extension": {
+      "type": "object",
+      "title": "Extension",
+      "description": "An extension data for a product.",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "title": "Extensions",
+      "description": "Collection of extension data for a product.",
+      "additionalProperties": {
+        "$ref": "#/definitions/extension"
+      }
+    },
+    "file-reference": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "file",
+          "enum": [
+            "file"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1970-01-01T00:00:00.000",
+          "x-go-name": "CreatedAt"
+        }
+      },
+      "x-go-name": "FileRelationship"
+    },
+    "files-relationship": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/file-reference"
+          }
+        }
+      },
+      "x-omitempty": true
+    },
+    "component-products-relationship": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "$ref": "#/definitions/self-link"
+        }
+      },
+      "x-omitempty": true
+    },
+    "formatted-price": {
+      "type": "object",
+      "title": "FormattedPrice",
+      "x-omitempty": true,
+      "description": "A price formatted for display.",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "x-omitempty": false,
+          "example": "47500"
+        },
+        "currency": {
+          "type": "string",
+          "example": "USD"
+        },
+        "formatted": {
+          "type": "string",
+          "example": "$475.00"
+        }
+      }
+    },
+    "hierarchy": {
+      "type": "object",
+      "title": "Hierarchy",
+      "description": "A hierarchy in a catalog (e.g. a category hierarchy). Hierarchies can have child nodes, as well as a list of attached products",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/hierarchy-attributes"
+        },
+        "id": {
+          "type": "string",
+          "example": "e871df93-c769-49a9-9394-a6fd555b8e8a",
+          "x-go-name": "ID"
+        },
+        "relationships": {
+          "$ref": "#/definitions/hierarchy-relationships"
+        },
+        "type": {
+          "type": "string",
+          "example": "hierarchy",
+          "x-go-name": "Type"
+        },
+        "meta": {
+          "$ref": "#/definitions/hierarchy-meta"
+        }
+      },
+      "x-go-name": "Hierarchy"
+    },
+    "hierarchy-meta": {
+      "type": "object",
+      "title": "HierarchyMeta",
+      "description": "A hierarchy's metadata.",
+      "properties": {
+        "language": {
+          "type": "string",
+          "example": "en-GB"
+        }
+      },
+      "x-go-name": "HierarchyMeta",
+      "x-omitempty": true
+    },
+    "hierarchy-attributes": {
+      "type": "object",
+      "title": "HierarchyAttributes",
+      "description": "Resource attributes of a catalog hierarchy.",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1970-01-01T00:00:00.000",
+          "x-go-name": "CreatedAt"
+        },
+        "published_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1970-01-01T00:00:00.000",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "example": "Formal dresswear",
+          "x-go-name": "Description"
+        },
+        "label": {
+          "type": "string",
+          "example": "category",
+          "x-go-name": "Label"
+        },
+        "name": {
+          "type": "string",
+          "example": "Formal dresswear",
+          "x-go-name": "Name"
+        },
+        "slug": {
+          "type": "string",
+          "example": "formal",
+          "x-go-name": "Slug"
+        },
+        "status": {
+          "type": "string",
+          "example": "live",
+          "x-go-name": "Status"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1970-01-01T00:00:00.000",
+          "x-go-name": "UpdatedAt"
+        }
+      },
+      "x-go-name": "HierarchyAttributes"
+    },
+    "hierarchy-data": {
+      "type": "object",
+      "title": "HierarchyData",
+      "description": "Container for hierarchies.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/hierarchy"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "hierarchy-list-data": {
+      "type": "object",
+      "title": "HierarchyListData",
+      "description": "Container for a list of hierarchies.",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/page-meta"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hierarchy"
+          }
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "hierarchy-relationships": {
+      "type": "object",
+      "title": "HierarchyRelationships",
+      "description": "Relationships to child nodes, and products.",
+      "properties": {
+        "products": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "$ref": "#/definitions/related-link"
+            }
+          }
+        },
+        "children": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "$ref": "#/definitions/related-link"
+            }
+          },
+          "required": [
+            "links"
+          ]
+        },
+        "nodes": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "$ref": "#/definitions/related-link"
+            }
+          },
+          "required": [
+            "links"
+          ]
+        }
+      },
+      "x-go-name": "HierarchyRelationships"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "x-nullable": true,
+          "format": "uri"
+        },
+        "first": {
+          "type": "string",
+          "x-nullable": true,
+          "format": "uri"
+        },
+        "last": {
+          "type": "string",
+          "x-nullable": true,
+          "format": "uri"
+        },
+        "prev": {
+          "type": "string",
+          "x-nullable": true,
+          "format": "uri"
+        },
+        "next": {
+          "type": "string",
+          "x-nullable": true,
+          "format": "uri"
+        }
+      }
+    },
+    "main-image-relationship": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "x-nullable": "true",
+          "properties": {
+            "type": {
+              "type": "string",
+              "example": "main_image",
+              "enum": [
+                "main_image"
+              ]
+            },
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "x-omitempty": true
+    },
+    "node": {
+      "type": "object",
+      "title": "Node",
+      "description": "A node in a catalog (e.g. a category node). Nodes can have child nodes, as well as a list of attached products",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/node-attributes"
+        },
+        "id": {
+          "type": "string",
+          "example": "e871df93-c769-49a9-9394-a6fd555b8e8a",
+          "x-go-name": "ID"
+        },
+        "relationships": {
+          "$ref": "#/definitions/node-relationships"
+        },
+        "type": {
+          "type": "string",
+          "example": "node",
+          "x-go-name": "Type"
+        },
+        "meta": {
+          "$ref": "#/definitions/node-meta"
+        }
+      },
+      "x-go-name": "Node"
+    },
+    "node-attributes": {
+      "type": "object",
+      "title": "NodeAttributes",
+      "description": "Resource attributes of a catalog node.",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1970-01-01T00:00:00.000",
+          "x-go-name": "CreatedAt"
+        },
+        "published_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1970-01-01T00:00:00.000",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "example": "Formal dresswear",
+          "x-go-name": "Description"
+        },
+        "label": {
+          "type": "string",
+          "example": "category",
+          "x-go-name": "Label"
+        },
+        "name": {
+          "type": "string",
+          "example": "Formal dresswear",
+          "x-go-name": "Name"
+        },
+        "slug": {
+          "type": "string",
+          "example": "formal",
+          "x-go-name": "Slug"
+        },
+        "status": {
+          "type": "string",
+          "example": "live",
+          "x-go-name": "Status"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1970-01-01T00:00:00.000",
+          "x-go-name": "UpdatedAt"
+        }
+      },
+      "x-go-name": "NodeAttributes"
+    },
+    "node-create-data": {
+      "type": "object",
+      "title": "NodeCreateData",
+      "description": "Container for nodes.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "title": "NodeCreateArgs",
+          "description": "A node in a catalog (e.g. a category node). Nodes can have child nodes, as well as a list of attached products",
+          "properties": {
+            "attributes": {
+              "type": "object",
+              "title": "NodeCreateAttributes",
+              "description": "Resource attributes of a catalog node.",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "example": "Formal dresswear",
+                  "x-go-name": "Description"
+                },
+                "hierarchy_id": {
+                  "type": "string",
+                  "description": "hierarchy id of the node",
+                  "example": "ddd401ac-db06-4d9e-af60-cf5206abb9bc"
+                },
+                "label": {
+                  "type": "string",
+                  "example": "category",
+                  "x-go-name": "Label"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Formal dresswear",
+                  "x-go-name": "Name"
+                },
+                "slug": {
+                  "type": "string",
+                  "example": "formal",
+                  "x-go-name": "Slug"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "Live",
+                  "x-go-name": "Status"
+                },
+                "locales": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "name"
+              ]
+            },
+            "relationships": {
+              "$ref": "#/definitions/node-relationships"
+            },
+            "id": {
+              "type": "string",
+              "example": "8fccaa19-dba9-4621-8d11-31a222a68c7c",
+              "x-go-name": "ID"
+            },
+            "type": {
+              "type": "string",
+              "example": "node",
+              "x-go-name": "Type"
+            }
+          },
+          "required": [
+            "type",
+            "attributes"
+          ]
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "node-data": {
+      "type": "object",
+      "title": "NodeData",
+      "description": "Container for nodes.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/node"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "node-list-data": {
+      "type": "object",
+      "title": "NodeListData",
+      "description": "Container for a list of nodes.",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/page-meta"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/node"
+          }
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "node-meta": {
+      "type": "object",
+      "title": "NodeMeta",
+      "description": "A node's metadata.",
+      "properties": {
+        "language": {
+          "type": "string",
+          "example": "en-GB"
+        },
+        "bread_crumb": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "8dbb35b2-ef04-477e-974d-e5f3abe6faae"
+          },
+          "x-omitempty": true
+        }
+      },
+      "x-go-name": "NodeMeta",
+      "x-omitempty": true
+    },
+    "node-reference": {
+      "type": "object",
+      "title": "NodeReference",
+      "description": "Minimum set of information to identify a catalog node.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "65477ce0-fcb8-436b-a120-3d57979421dd",
+          "x-go-name": "ID"
+        },
+        "label": {
+          "type": "string",
+          "example": "category",
+          "x-go-name": "Label"
+        },
+        "name": {
+          "type": "string",
+          "example": "Formal dresswear",
+          "x-go-name": "Name"
+        }
+      },
+      "x-go-name": "NodeReference"
+    },
+    "node-relationships": {
+      "type": "object",
+      "title": "NodeRelationships",
+      "description": "Relationships to parent and child nodes, and products.",
+      "properties": {
+        "products": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "x-omitempty": true,
+              "items": {
+                "$ref": "#/definitions/product-reference"
+              }
+            },
+            "links": {
+              "$ref": "#/definitions/related-link"
+            }
+          }
+        },
+        "children": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "$ref": "#/definitions/related-link"
+            }
+          },
+          "required": [
+            "links"
+          ]
+        },
+        "parent": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "node",
+                  "enum": [
+                    "node"
+                  ]
+                },
+                "id": {
+                  "type": "string",
+                  "example": "8fccaa19-dba9-4621-8d11-31a222a68c7c",
+                  "x-go-name": "ID"
+                }
+              },
+              "required": [
+                "id",
+                "type"
+              ]
+            },
+            "links": {
+              "$ref": "#/definitions/related-link"
+            }
+          },
+          "required": [
+            "data"
+          ]
+        },
+        "hierarchy": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "hierarchy",
+                  "enum": [
+                    "hierarchy"
+                  ]
+                },
+                "id": {
+                  "type": "string",
+                  "example": "8fccaa19-dba9-4621-8d11-31a222a68c7c",
+                  "x-go-name": "ID"
+                }
+              },
+              "required": [
+                "id",
+                "type"
+              ]
+            },
+            "links": {
+              "$ref": "#/definitions/related-link"
+            }
+          },
+          "required": [
+            "data"
+          ]
+        }
+      },
+      "x-go-name": "NodeRelationships"
+    },
+    "node-relationships-data": {
+      "type": "object",
+      "title": "NodeRelationshipsData",
+      "description": "Container for node relationships.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/node-relationships"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "page-meta": {
+      "type": "object",
+      "title": "PageMeta",
+      "properties": {
+        "results": {
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        },
+        "page": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "offset": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "current": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "total": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
+      }
+    },
+    "pricebook": {
+      "type": "object",
+      "title": "Pricebook",
+      "description": "Top level entity in the pricebooks domain model. It contains a list of product prices.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "4c45e4ec-26e0-4043-86e4-c15b9cf985a7",
+          "x-go-name": "ID"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type",
+          "default": "pricebook",
+          "example": "pricebook",
+          "enum": [
+            "pricebook"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "created_at": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2020-09-22T09:00:00",
+              "x-go-name": "CreatedAt"
+            },
+            "description": {
+              "type": "string",
+              "example": "This is a pricebook",
+              "x-nullable": true,
+              "x-go-name": "Description"
+            },
+            "name": {
+              "type": "string",
+              "example": "pricebook-store-abc",
+              "x-nullable": true,
+              "x-go-name": "Name"
+            },
+            "updated_at": {
+              "type": "string",
+              "example": "2020-09-22T09:00:00",
+              "format": "date-time",
+              "x-go-name": "UpdatedAt"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "attributes"
+      ],
+      "additionalProperties": false,
+      "x-go-name": "Pricebook"
+    },
+    "pricebook-create-data": {
+      "type": "object",
+      "title": "PricebookData",
+      "description": "Container for pricebooks.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "description": "New top level pricebook.",
+          "title": "PricebookCreateArgs",
+          "properties": {
+            "type": {
+              "type": "string",
+              "x-go-name": "Type",
+              "default": "pricebook",
+              "example": "pricebook",
+              "enum": [
+                "pricebook"
+              ]
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "example": "This is a pricebook",
+                  "x-nullable": true,
+                  "x-go-name": "Description"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "pricebook-store-abc",
+                  "x-nullable": true,
+                  "x-go-name": "Name"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "attributes"
+          ],
+          "additionalProperties": false
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "pricebook-data": {
+      "type": "object",
+      "title": "PricebookData",
+      "description": "Container for pricebooks.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/pricebook"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "pricebook-price": {
+      "type": "object",
+      "title": "PricebookPrice",
+      "description": "ProductPrice associates a collection of locale specific prices with a product ID.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "product-price",
+          "default": "product-price",
+          "enum": [
+            "product-price"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "currencies": {
+              "$ref": "#/definitions/tiered-currencies"
+            },
+            "sales": {
+              "$ref": "#/definitions/sales"
+            },
+            "sku": {
+              "type": "string",
+              "example": "4c45e4ec-sku"
+            }
+          },
+          "required": [
+            "currencies",
+            "sku"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "example": "4c45e4ec-26e0-4043-86e4-c15b9cf985a7",
+          "x-go-name": "ID"
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "pricebook-price-create-data": {
+      "type": "object",
+      "title": "PricebookPriceCreateData",
+      "description": "Container for pricebook prices.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "title": "PricebookPriceCreateArgs",
+          "description": "ProductPrice associates a collection of locale specific prices with a product ID.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "example": "product-price",
+              "default": "product-price",
+              "enum": [
+                "product-price"
+              ]
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "currencies": {
+                  "$ref": "#/definitions/tiered-currencies"
+                },
+                "sales": {
+                  "$ref": "#/definitions/sales"
+                },
+                "sku": {
+                  "type": "string",
+                  "example": "4c45e4ec-sku"
+                }
+              },
+              "required": [
+                "currencies",
+                "sku"
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "attributes"
+          ]
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "pricebook-price-data": {
+      "type": "object",
+      "title": "PricebookPriceData",
+      "description": "Container for pricebook prices.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/pricebook-price"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "product": {
+      "type": "object",
+      "title": "Product",
+      "description": "A product in a catalog.",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/product-attributes"
+        },
+        "id": {
+          "type": "string",
+          "example": "8fccaa19-dba9-4621-8d11-31a222a68c7c",
+          "x-go-name": "ID"
+        },
+        "relationships": {
+          "$ref": "#/definitions/product-relationships"
+        },
+        "type": {
+          "type": "string",
+          "example": "product",
+          "x-go-name": "Type"
+        },
+        "meta": {
+          "$ref": "#/definitions/product-meta"
+        }
+      },
+      "x-go-name": "Product"
+    },
+    "product-attributes": {
+      "type": "object",
+      "title": "ProductAttributes",
+      "description": "A product's attributes.",
+      "properties": {
+        "availability": {
+          "type": "string",
+          "example": "available",
+          "x-go-name": "Availability"
+        },
+        "published_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1970-01-01T00:00:00.000",
+          "x-nullable": true
+        },
+        "base_product": {
+          "type": "boolean",
+          "example": false,
+          "default": false,
+          "x-go-name": "BaseProduct"
+        },
+        "base_product_id": {
+          "type": "string",
+          "example": "cdf574bc-e36e-48fc-9eac-01c87839b285",
+          "x-go-name": "BaseProductID"
+        },
+        "commodity_type": {
+          "type": "string",
+          "example": "physical",
+          "x-go-name": "CommodityType"
+        },
+        "upc_ean": {
+          "type": "string",
+          "example": "0123456",
+          "x-go-name": "UpcEan"
+        },
+        "manufacturer_part_num": {
+          "type": "string",
+          "example": "mfn1",
+          "x-go-name": "ManufacturerPartNum"
+        },
+        "price_modifiers": {
+          "type": "array",
+          "description": "A list of price modifier names",
+          "items": {
+            "type": "string",
+            "example": "modifier-1"
+          },
+          "x-go-name": "PriceModifiers",
+          "x-omitempty": true
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1970-01-01T00:00:00.000",
+          "x-go-name": "CreatedAt"
+        },
+        "description": {
+          "type": "string",
+          "example": "This is a product",
+          "x-go-name": "Description"
+        },
+        "dimensions": {
+          "type": "string",
+          "example": "4x5x2",
+          "x-go-name": "Dimensions"
+        },
+        "manage_stock": {
+          "type": "boolean",
+          "example": false,
+          "default": false,
+          "x-go-name": "ManageStock"
+        },
+        "name": {
+          "type": "string",
+          "example": "Blue shirt",
+          "x-go-name": "Name"
+        },
+        "price": {
+          "$ref": "#/definitions/currencies",
+          "x-go-name": "Price"
+        },
+        "tiers": {
+          "$ref": "#/definitions/tiers",
+          "x-go-name": "Tiers"
+        },
+        "components": {
+          "$ref": "#/definitions/components",
+          "x-go-name": "Components"
+        },
+        "product_hash": {
+          "type": "string",
+          "x-go-name": "ProductHash"
+        },
+        "sku": {
+          "type": "string",
+          "example": "blue-shirt",
+          "x-go-name": "Sku"
+        },
+        "slug": {
+          "type": "string",
+          "example": "blue-shirt",
+          "x-go-name": "Slug"
+        },
+        "status": {
+          "type": "string",
+          "example": "live",
+          "x-go-name": "Status"
+        },
+        "updated_at": {
+          "type": "string",
+          "example": "1970-01-01T00:00:00.000",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt"
+        },
+        "weight": {
+          "type": "object",
+          "title": "Weight",
+          "description": "A product's weight.",
+          "properties": {
+            "g": {
+              "type": "number",
+              "format": "double",
+              "x-go-name": "G"
+            },
+            "kg": {
+              "type": "number",
+              "format": "double",
+              "x-go-name": "Kg"
+            },
+            "lb": {
+              "type": "number",
+              "format": "double",
+              "x-go-name": "Lb"
+            },
+            "oz": {
+              "type": "number",
+              "format": "double",
+              "x-go-name": "Oz"
+            }
+          },
+          "x-go-name": "Weight"
+        },
+        "extensions": {
+          "$ref": "#/definitions/extensions",
+          "x-go-name": "Extensions"
+        }
+      },
+      "x-go-name": "ProductAttributes"
+    },
+    "product-create-data": {
+      "type": "object",
+      "title": "ProductData",
+      "description": "Container for products.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "title": "ProductCreateArgs",
+          "description": "A new product in a catalog.",
+          "properties": {
+            "attributes": {
+              "type": "object",
+              "title": "ProductCreateAttributes",
+              "description": "A product's attributes.",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "example": "This is a product"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Blue shirt"
+                },
+                "sku": {
+                  "type": "string",
+                  "example": "blue-shirt"
+                },
+                "slug": {
+                  "type": "string",
+                  "example": "blue-shirt"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "live"
+                },
+                "locales": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "name",
+                "status"
+              ]
+            },
+            "id": {
+              "type": "string",
+              "example": "8fccaa19-dba9-4621-8d11-31a222a68c7c",
+              "x-go-name": "ID"
+            },
+            "type": {
+              "type": "string",
+              "example": "product",
+              "x-go-name": "Type"
+            }
+          },
+          "required": [
+            "attributes",
+            "type"
+          ]
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "product-data": {
+      "type": "object",
+      "title": "ProductData",
+      "description": "Container for products.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/product"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "product-diff": {
+      "x-go-name": "ProductDiff",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "e871df93-c769-49a9-9394-a6fd555b8e8a",
+          "x-go-name": "ID"
+        },
+        "type": {
+          "type": "string",
+          "example": "product_diff",
+          "x-go-name": "Type"
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "sku": {
+              "type": "string"
+            },
+            "this_release_id": {
+              "type": "string"
+            },
+            "other_release_id": {
+              "type": "string"
+            },
+            "diff_created_at": {
+              "type": "string",
+              "format": "date-time",
+              "example": "1970-01-01T00:00:00.000"
+            },
+            "exists": {
+              "x-go-name": "ProductDiffExists",
+              "type": "object",
+              "properties": {
+                "this": {
+                  "type": "boolean"
+                },
+                "other": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "this",
+                "other"
+              ]
+            },
+            "updated_at": {
+              "x-go-name": "ProductDiffUpdatedAt",
+              "type": "object",
+              "properties": {
+                "this": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "1970-01-01T00:00:00.000",
+                  "x-nullable": true,
+                  "x-omitempty": true
+                },
+                "other": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "1970-01-01T00:00:00.000",
+                  "x-nullable": true,
+                  "x-omitempty": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "product-list-data": {
+      "type": "object",
+      "title": "ProductListData",
+      "description": "Container for a list of products.",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/page-meta"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/product"
+          },
+          "x-go-name": "Data"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "product-meta": {
+      "type": "object",
+      "title": "ProductMeta",
+      "description": "A product's metadata.",
+      "properties": {
+        "bread_crumbs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "8dbb35b2-ef04-477e-974d-e5f3abe6faae"
+            }
+          },
+          "x-omitempty": true
+        },
+        "catalog_id": {
+          "type": "string",
+          "example": "362a16dc-f7c6-4280-83d6-4fcc152af091",
+          "x-go-name": "CatalogID"
+        },
+        "pricebook_id": {
+          "type": "string",
+          "example": "f5466169-0037-460c-b181-b02682b6f4de",
+          "x-go-name": "PricebookID",
+          "x-nullable": true
+        },
+        "display_price": {
+          "$ref": "#/definitions/display-price"
+        },
+        "catalog_source": {
+          "type": "string",
+          "example": "pim",
+          "enum": [
+            "legacy",
+            "pim"
+          ],
+          "x-go-name": "CatalogSource"
+        },
+        "sale_id": {
+          "type": "string",
+          "x-go-name": "SaleID"
+        },
+        "sale_expires": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1970-01-01T00:00:00.000",
+          "x-nullable": true,
+          "x-go-name": "SaleExpires"
+        },
+        "original_price": {
+          "$ref": "#/definitions/currencies",
+          "x-go-name": "OriginalPrice"
+        },
+        "original_display_price": {
+          "$ref": "#/definitions/display-price"
+        },
+        "bundle_configuration": {
+          "$ref": "#/definitions/bundle-configuration",
+          "x-omitempty": true
+        },
+        "component_products": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "sale_id": {
+                "type": "string",
+                "x-go-name": "SaleID"
+              },
+              "sale_expires": {
+                "type": "string",
+                "format": "date-time",
+                "example": "1970-01-01T00:00:00.000",
+                "x-nullable": true,
+                "x-go-name": "SaleExpires"
+              },
+              "price": {
+                "$ref": "#/definitions/currencies",
+                "x-go-name": "Price"
+              },
+              "display_price": {
+                "$ref": "#/definitions/display-price"
+              },
+              "original_price": {
+                "$ref": "#/definitions/currencies",
+                "x-go-name": "OriginalPrice"
+              },
+              "original_display_price": {
+                "$ref": "#/definitions/display-price"
+              },
+              "pricebook_id": {
+                "type": "string",
+                "example": "f5466169-0037-460c-b181-b02682b6f4de",
+                "x-go-name": "PricebookID",
+                "x-nullable": true
+              }
+            },
+            "x-go-name": "ComponentProductMeta"
+          }
+        },
+        "price_modifiers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "modifier_type": {
+                "type": "string",
+                "example": "price_equals"
+              },
+              "currencies": {
+                "$ref": "#/definitions/currencies"
+              }
+            },
+            "x-go-name": "PriceModifierMeta"
+          }
+        },
+        "tiers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "sale_id": {
+                "type": "string",
+                "x-go-name": "SaleID"
+              },
+              "sale_expires": {
+                "type": "string",
+                "format": "date-time",
+                "example": "1970-01-01T00:00:00.000",
+                "x-nullable": true,
+                "x-go-name": "SaleExpires"
+              },
+              "display_price": {
+                "$ref": "#/definitions/display-price",
+                "x-go-name": "DisplayPrice"
+              },
+              "original_price": {
+                "$ref": "#/definitions/currencies",
+                "x-go-name": "OriginalPrice"
+              },
+              "original_display_price": {
+                "$ref": "#/definitions/display-price",
+                "x-go-name": "OriginalDisplayPrice"
+              }
+            },
+            "x-go-name": "ProductMetaTier"
+          },
+          "x-go-name": "ProductMetaTiers"
+        },
+        "variation_matrix": {
+          "type": "object"
+        },
+        "variations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "x-go-name": "ID"
+              },
+              "name": {
+                "type": "string"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "x-go-name": "ID"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "x-go-name": "ProductVariationOption"
+                }
+              }
+            },
+            "x-go-name": "ProductVariation"
+          },
+          "x-omitempty": true
+        },
+        "language": {
+          "type": "string",
+          "example": "en-GB"
+        }
+      },
+      "x-go-name": "ProductMeta",
+      "x-omitempty": true
+    },
+    "bundle-configuration-data": {
+      "type": "object",
+      "title": "BundleConfigurationData",
+      "description": "Container for a bundle configuration.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/bundle-configuration",
+          "x-go-name": "Data"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "bundle-configuration": {
+      "type": "object",
+      "title": "BundleConfiguration",
+      "description": "A specification of a bundle's configuration.",
+      "properties": {
+        "selected_options": {
+          "type": "object",
+          "description": "The configuration of each component",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        }
+      },
+      "required": [
+        "selected_options"
+      ],
+      "x-go-name": "ProductBundleConfiguration"
+    },
+    "product-reference": {
+      "type": "object",
+      "title": "ProductReference",
+      "description": "A product identifier.",
+      "x-nullable": "true",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "x-go-name": "ID"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type",
+          "example": "product",
+          "enum": [
+            "product"
+          ]
+        }
+      },
+      "x-go-name": "ProductReference"
+    },
+    "product-reference-list-data": {
+      "type": "object",
+      "title": "ProductReferenceListData",
+      "description": "Container for a list of product references.",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/page-meta"
+        },
+        "data": {
+          "$ref": "#/definitions/product-references"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "product-references": {
+      "type": "array",
+      "title": "ProductReferences",
+      "description": "A list of product identifiers.",
+      "items": {
+        "$ref": "#/definitions/product-reference"
+      },
+      "x-go-name": "ProductReferences"
+    },
+    "product-relationships": {
+      "type": "object",
+      "title": "ProductRelationships",
+      "description": "Relationships to child and parent products, and catalog nodes.",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/node-reference"
+          },
+          "x-go-name": "Categories",
+          "x-omitempty": true
+        },
+        "brands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/node-reference"
+          },
+          "x-go-name": "Brands",
+          "x-omitempty": true
+        },
+        "collections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/node-reference"
+          },
+          "x-go-name": "Collections",
+          "x-omitempty": true
+        },
+        "parent": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "$ref": "#/definitions/product-reference"
+            }
+          },
+          "x-go-name": "Parent",
+          "x-omitempty": true
+        },
+        "children": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "$ref": "#/definitions/product-references"
+            }
+          },
+          "x-go-name": "Children",
+          "x-omitempty": true
+        },
+        "custom-modifiers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "CustomModifiers",
+          "x-omitempty": true
+        },
+        "files": {
+          "$ref": "#/definitions/files-relationship"
+        },
+        "main_image": {
+          "$ref": "#/definitions/main-image-relationship"
+        },
+        "component_products": {
+          "$ref": "#/definitions/component-products-relationship"
+        },
+        "modifiers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "Modifiers",
+          "x-omitempty": true
+        },
+        "product-spec": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "ProductSpec",
+          "x-omitempty": true
+        },
+        "variationOpts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "VariationOpts",
+          "x-omitempty": true
+        },
+        "variations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "Variations",
+          "x-omitempty": true
+        }
+      },
+      "x-go-name": "ProductRelationships",
+      "x-omitempty": true
+    },
+    "product-relationships-data": {
+      "type": "object",
+      "title": "ProductRelationshipsData",
+      "description": "Container for product relationships.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/product-relationships"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "products-for-cart": {
+      "type": "object",
+      "title": "ProductsForCart",
+      "description": "A list of products to be added to cart.",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/product-data"
+          },
+          "x-go-name": "Data"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "x-go-name": "ProductsForCart"
+    },
+    "products-for-cart-configuration": {
+      "type": "object",
+      "title": "ProductsForCartConfiguration",
+      "description": "A list of product id or sku and bundle configuration for cart.",
+      "properties": {
+        "data": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "x-go-name": "ID",
+                "x-nullable": true
+              },
+              "sku": {
+                "type": "string",
+                "x-go-name": "SKU",
+                "x-nullable": true
+              },
+              "bundle_configuration": {
+                "$ref": "#/definitions/bundle-configuration"
+              }
+            }
+          },
+          "x-go-name": "Data"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "x-go-name": "ProductsForCartConfiguration"
+    },
+    "related-link": {
+      "type": "object",
+      "properties": {
+        "related": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "related"
+      ]
+    },
+    "self-link": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "self"
+      ]
+    },
+    "release": {
+      "type": "object",
+      "title": "Release",
+      "description": "A catalog release represents a collection of hierarchical product data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-go-name": "ID",
+          "example": "8dbb35b2-ef04-477e-974d-e5f3abe6faae"
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "Clothing"
+            },
+            "published_at": {
+              "type": "string",
+              "format": "date-time",
+              "example": "1970-01-01T00:00:00.000",
+              "x-nullable": true
+            },
+            "catalog_id": {
+              "type": "string",
+              "example": "0194f54d-f2a1-4e33-9a6e-9ec366152490"
+            },
+            "description": {
+              "type": "string",
+              "example": "Catalog for Store 123",
+              "default": ""
+            },
+            "hierarchies": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/node-reference"
+              },
+              "x-go-name": "RootNodes"
+            }
+          }
+        },
+        "relationships": {
+          "$ref": "#/definitions/release-relationships"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Type"
+        },
+        "meta": {
+          "$ref": "#/definitions/release-meta"
+        }
+      },
+      "x-go-name": "Release"
+    },
+    "release-data": {
+      "type": "object",
+      "title": "Release Data",
+      "description": "Container for a catalog release.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/release"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "release-list-data": {
+      "type": "object",
+      "title": "ReleaseListData",
+      "description": "Container for a list of catalog releases.",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/release"
+          }
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      }
+    },
+    "release-meta": {
+      "type": "object",
+      "title": "ReleaseMeta",
+      "description": "A release's metadata.",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1970-01-01T00:00:00.000"
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1970-01-01T00:00:00.000",
+          "x-nullable": true
+        },
+        "release_status": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "IN_PROGRESS",
+            "FAILED",
+            "PUBLISHED"
+          ]
+        },
+        "language": {
+          "type": "string",
+          "example": "en-GB"
+        },
+        "is_full_publish": {
+          "type": "boolean",
+          "example": false,
+          "default": false,
+          "x-go-name": "IsFullPublish"
+        }
+      },
+      "x-go-name": "ReleaseMeta",
+      "x-omitempty": true
+    },
+    "release-relationships": {
+      "type": "object",
+      "title": "ReleaseRelationships",
+      "description": "Relationships to hierarchies, and products.",
+      "properties": {
+        "delta": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "$ref": "#/definitions/related-link"
+            }
+          }
+        },
+        "products": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "$ref": "#/definitions/related-link"
+            }
+          }
+        },
+        "hierarchies": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "$ref": "#/definitions/related-link"
+            }
+          },
+          "required": [
+            "links"
+          ]
+        }
+      },
+      "x-go-name": "ReleaseRelationships"
+    },
+    "rule": {
+      "type": "object",
+      "title": "Catalog Rule",
+      "description": "A catalog rule specifies which catalog to use for a given shopper context.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The catalog rule ID. Use this to get, modify, or delete the catalog rule.",
+          "example": "8dbb35b2-ef04-477e-974d-e5f3abe6faae"
+        },
+        "attributes": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "rule-123"
+            },
+            "description": {
+              "type": "string",
+              "example": "Catalog Rule for most favored customers",
+              "default": "",
+              "x-omitempty": true
+            },
+            "account_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "x-omitempty": true
+            },
+            "customer_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "x-omitempty": true
+            },
+            "channels": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "x-omitempty": true
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "x-omitempty": true
+            },
+            "schedules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/rule-schedule"
+              },
+              "x-omitempty": true
+            },
+            "catalog_id": {
+              "type": "string",
+              "description": "Either the ID of a catalog, or 'legacy' to use catalog data set up with `/v2/products`",
+              "example": "d09b4e16-08a5-4f42-817c-6e0d98acbb63"
+            },
+            "created_at": {
+              "type": "string",
+              "example": "2020-09-22T09:00:00",
+              "format": "date-time"
+            },
+            "updated_at": {
+              "type": "string",
+              "example": "2020-09-22T09:00:00",
+              "format": "date-time"
+            }
+          },
+          "required": [
+            "name",
+            "catalog_id",
+            "created_at",
+            "updated_at"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "example": "catalog_rule",
+          "enum": [
+            "catalog_rule"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "attributes"
+      ]
+    },
+    "rule-create-data": {
+      "type": "object",
+      "title": "CatalogRuleCreateData",
+      "description": "A catalog rule specifies which catalog to use for a given shopper context.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "example": "rule-123"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Catalog Rule for most favored customers",
+                  "default": "",
+                  "x-nullable": true
+                },
+                "account_ids": {
+                  "type": "array",
+                  "x-nullable": true,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "customer_ids": {
+                  "type": "array",
+                  "x-nullable": true,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "channels": {
+                  "type": "array",
+                  "x-nullable": true,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "tags": {
+                  "type": "array",
+                  "x-nullable": true,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schedules": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/rule-schedule"
+                  },
+                  "x-nullable": true
+                },
+                "catalog_id": {
+                  "type": "string",
+                  "description": "Either the ID of a catalog, or 'legacy' to use catalog data set up with `/v2/products`",
+                  "example": "d09b4e16-08a5-4f42-817c-6e0d98acbb63"
+                }
+              },
+              "required": [
+                "name",
+                "catalog_id"
+              ]
+            },
+            "type": {
+              "type": "string",
+              "example": "catalog_rule",
+              "enum": [
+                "catalog_rule"
+              ]
+            }
+          },
+          "required": [
+            "type",
+            "attributes"
+          ]
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "rule-data": {
+      "type": "object",
+      "title": "CatalogRuleData",
+      "description": "Container for a single catalog rule.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/rule"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "rule-list-data": {
+      "type": "object",
+      "title": "CatalogRuleListData",
+      "description": "Container for a list of catalog rules.",
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/page-meta"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/rule"
+          }
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "rule-schedule": {
+      "type": "object",
+      "title": "Catalog Schedule",
+      "description": "A period of time during which a catalog is valid",
+      "properties": {
+        "valid_from": {
+          "type": "string",
+          "example": "2020-09-22T09:00:00",
+          "format": "date-time",
+          "x-nullable": true,
+          "x-go-name": "ValidFrom"
+        },
+        "valid_to": {
+          "type": "string",
+          "example": "2020-09-22T09:00:00",
+          "format": "date-time",
+          "x-nullable": true,
+          "x-go-name": "ValidTo"
+        }
+      },
+      "x-go-name": "RuleSchedule"
+    },
+    "rule-update-data": {
+      "type": "object",
+      "title": "CatalogRuleUpdateData",
+      "description": "A catalog rule specifies which catalog to use for a given shopper context.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The catalog rule ID. Use this to get, modify, or delete the catalog rule.",
+              "example": "8dbb35b2-ef04-477e-974d-e5f3abe6faae"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "example": "rule-123",
+                  "x-nullable": true
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Catalog Rule for most favored customers",
+                  "default": "",
+                  "x-nullable": true
+                },
+                "account_ids": {
+                  "type": "array",
+                  "x-nullable": true,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "customer_ids": {
+                  "type": "array",
+                  "x-nullable": true,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "channels": {
+                  "type": "array",
+                  "x-nullable": true,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "schedules": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/rule-schedule"
+                  },
+                  "x-nullable": true
+                },
+                "tags": {
+                  "type": "array",
+                  "x-nullable": true,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "catalog_id": {
+                  "type": "string",
+                  "description": "Either the ID of a catalog, or 'legacy' to use catalog data set up with `/v2/products`",
+                  "example": "d09b4e16-08a5-4f42-817c-6e0d98acbb63",
+                  "x-nullable": true
+                }
+              }
+            },
+            "type": {
+              "type": "string",
+              "example": "catalog_rule",
+              "enum": [
+                "catalog_rule"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "type"
+          ]
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "sale": {
+      "type": "object",
+      "description": "A set of sale prices and a validity period.",
+      "properties": {
+        "schedule": {
+          "$ref": "#/definitions/schedule"
+        },
+        "currencies": {
+          "$ref": "#/definitions/tiered-currencies"
+        }
+      }
+    },
+    "sales": {
+      "type": "object",
+      "title": "Sales",
+      "description": "A set of sale specifications",
+      "additionalProperties": {
+        "x-nullable": true,
+        "$ref": "#/definitions/sale"
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "description": "A definition of the times at which a sale is valid",
+      "properties": {
+        "valid_from": {
+          "type": "string",
+          "example": "2020-09-22T09:00:00",
+          "format": "date-time",
+          "x-nullable": true,
+          "x-go-name": "ValidFrom"
+        },
+        "valid_to": {
+          "type": "string",
+          "example": "2020-09-22T09:00:00",
+          "format": "date-time",
+          "x-nullable": true,
+          "x-go-name": "ValidTo"
+        }
+      },
+      "x-go-name": "Schedule"
+    },
+    "tier": {
+      "type": "object",
+      "title": "Tier",
+      "description": "A tiered price for a product.",
+      "properties": {
+        "minimum_quantity": {
+          "type": "integer",
+          "example": "5"
+        },
+        "price": {
+          "$ref": "#/definitions/currencies"
+        }
+      }
+    },
+    "tiered-amount": {
+      "type": "object",
+      "title": "TieredAmount",
+      "description": "A current specific price for a product.",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "example": 100,
+          "format": "int64",
+          "x-omitempty": false,
+          "x-go-name": "Amount"
+        },
+        "includes_tax": {
+          "type": "boolean",
+          "example": false,
+          "default": false,
+          "x-go-name": "IncludesTax"
+        },
+        "tiers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "minimum_quantity": {
+                "type": "integer",
+                "example": 5,
+                "x-go-name": "MinimumQuantity"
+              },
+              "amount": {
+                "type": "integer",
+                "example": 100,
+                "format": "int64",
+                "x-omitempty": false,
+                "x-go-name": "Amount"
+              }
+            },
+            "x-go-name": "TierAmount"
+          },
+          "x-go-name": "Tiers"
+        }
+      },
+      "x-go-name": "TieredAmount"
+    },
+    "tiered-currencies": {
+      "type": "object",
+      "title": "TieredCurrencies",
+      "description": "Collection of currency specific prices for a product.",
+      "additionalProperties": {
+        "$ref": "#/definitions/tiered-amount"
+      }
+    },
+    "tiers": {
+      "type": "object",
+      "title": "Tiers",
+      "description": "Collection of tiered prices for a product.",
+      "additionalProperties": {
+        "$ref": "#/definitions/tier"
+      }
+    }
+  }
+}

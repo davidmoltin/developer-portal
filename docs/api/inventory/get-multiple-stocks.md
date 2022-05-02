@@ -20,15 +20,15 @@ Retrieves stocks for multiple products.
 
 ### Headers
 
-| Name | Required | Type | Description |
-| :--- | :--- | :--- | :--- |
+| Name            | Required | Type     | Description                                         |
+| :---            | :---     | :---     | :---                                                |
 | `Authorization` | Required | `string` | The Bearer token required to get access to the API. |
 
 ### Body
 
-| Name | Required | Type      | Description |
-| :--- | :--- |:----------| :--- |
-| `id` | Required | `string` | The unique identifier of the product. |
+| Name            | Required | Type      | Description |
+| :-------------- | :------- |:----------| :------------------------------------------------- |
+| `id`            | Required | `string`  | The unique identifier of the product.              |
 
 ## Request Example
 
