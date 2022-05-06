@@ -7,9 +7,9 @@ Make this uniquely yours.
 
 ```yaml
 meta:
-  title: Redocly Training
-  description: The best API documentation generator ever.
-  siteUrl: https://portal-demo.redoc.ly
+  title: Elastic Path Developer Portal
+  description: Everything you ever wanted to know about Elastic Path Commerce Cloud
+  siteUrl: https://elasticpath.redoc.ly
 ```
 
 The title is used within the html title tag.

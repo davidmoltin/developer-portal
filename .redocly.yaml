@@ -1,0 +1,22 @@
+organization: ElasticPath
+# The organization ID of a Redocly Workflows organization.
+# Used for easier integration with the API registry and hosted Reference docs,
+# not required for local OpenAPI CLI usage.
+
+apis:
+
+# A collection of objects, each representing one API.
+# An API should be defined by a name, an optional version,
+# and the path to the root OpenAPI document.
+# Additionally, each API can have its own lint and features.openapi
+# sections for fine-grained control.
+# Example:
+  pcm:
+    root: ./openapi/pcm-swagger.json
+
+features.openapi:
+  pagination: section
+  generateCodeSamples:
+    languages:
+      -  lang: curl
+         label: cURL

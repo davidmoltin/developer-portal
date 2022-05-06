@@ -20,6 +20,15 @@ Use catalog rules to schedule a catalog to appear during a particular date and t
 
 When a catalog is ready to be used in a store, you publish it. You can create and publish catalogs for different contexts and channels. You retrieve catalogs for your shopper experience by using the Catalog View API.
 
+Replace with current catalog concept page!
+
+```mermaid
+graph TD
+    A[Hierarchy 1 <br/>e5a64eae-56c2-48cd-b8b1-f5d3be734d52]  --> B(Node 3 <br/>a96a898b-444c-40b6-9c27-5fc74d08e685)
+    A --> C(Node 1 <br/>94b882fa-85de-470e-acb3-5b11358e02de)
+    C --> D(Node 2 <br/>04e748f1-83db-4013-85c8-9edfb0e1b5fa)
+```
+
 ## Catalogs with v2 Product resources
 
 While catalogs were designed for use with Product Content Management services, you can use the Catalog View API to retrieve v2 Product resources. For example, if you do not see a need to migrate `v2/products` to `pcm/products` resources, but you want to speed up requests for products, you can use the read-only Catalog View service to retrieve the products.

@@ -10,11 +10,11 @@ linkChecker:
     CheckExternal: false
 logo:
   image: ./images/logo.png
-  altText: Redocly Training
+  altText: Elastic Path Commerce Cloud Documentation
 toc:
   enable: true
 oasDefinitions:
-  petstore: ./openapi/petstore.yaml
+  pcm: ./openapi/pcm-swagger.json
   # add links to definitions in our API registry by using a fully qualified URL.
 stylesheets:
   - https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap
@@ -31,7 +31,7 @@ nav:
     page: docs/index.md
 
   - label: Changelog
-    icon: ./images/redocly-icon-white.png
+   # icon: ./images/redocly-icon-white.png
     page: docs/changelog.md
 
   - search: true

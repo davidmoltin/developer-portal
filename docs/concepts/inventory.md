@@ -26,7 +26,7 @@ There are three mandatory steps to a complete an order in relation to inventory:
 The following flowchart depicts the process of an unpaid order.
 
 ```mermaid
-graph LR
+graph DL
     A[Add Product to Cart] --> B{Enough Stock?}
     B -->|Yes| C[Checkout]
     B -->|No| D[Return Error]

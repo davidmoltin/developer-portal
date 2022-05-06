@@ -1,8 +1,9 @@
 type: reference-docs
-definitionId: petstore
+definitionId: catalog-view
 settings:
   generateCodeSamples:
     languages:
       - lang: curl
       - lang: JavaScript
       - lang: Node.js
+      - lang: java
