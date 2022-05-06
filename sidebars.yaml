@@ -27,9 +27,10 @@ docs:
   - group: Shopper Catalogs
     expanded: false
     pages:
-      - page: openapi/catalog-view.json/*
+      - label: Catalog Concept
+        page: docs/concepts/catalogs.md
+      - page: openapi/pcm-swagger.json/*
   - group: Files
-    expanded: false
     pages: 
       - separator: API
       - label: Files Overview
@@ -77,16 +78,16 @@ docs:
       - label: Auth
      
   - group: Customers and Accounts (NO)
-    expanded: false
     pages: 
       - label: Auth
        
   - group: Promotions
-    expanded: false
     pages:
       - label: Promotions Concept
         page: docs/concepts/promotions.md
       - separator: API
+      - label: Overview
+        page: docs/api/promotions/index.md
       - label: Overview
         page: docs/api/promotions/index.md
       - group: Promotion Management
