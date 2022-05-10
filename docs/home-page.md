@@ -31,7 +31,7 @@ Now, change remove that link and delete your `index.md` file.
 
 MDX allows using React components within markdown files with the file extension `.mdx`.
 
-Open the `index.mdx` file and spend a few minutes reviewing the structure.
+Open the `index.mdx` file and spend a few minutes reviewing the structure. 
 
 If you do want the sidebar navigation with the MDX file, be sure you remove or comment this line, or you will see two top nav bars.
 
@@ -44,7 +44,7 @@ If you do want the sidebar navigation with the MDX file, be sure you remove or c
 Let's change the Jumbotron text within the H1 and H2 header components.
 
 ```md
-<Jumbotron>
+<Jumbotron parallaxEffect bgImage={images/screen-code.jpg}>
   <NavBar location={props.location} standalone={false} />
   <H1>Elastic Path Commerce Cloud</H1>
   <H2>Developer Portal and Training Center</H2>
@@ -108,7 +108,7 @@ Next, we don't want that navbar or the buttons on this jumbotron, so we delete t
 We'll paste that right above the section header.
 
 ```md
-  <Jumbotron>
+  <Jumbotron parallaxEffect bgImage={icon1}>
     <H1>Tutorials</H1>
     <H2>Get setup faster...</H2>
   </Jumbotron>

@@ -1,5 +1,6 @@
 docs:
   - page: docs/index.md
+    label: Home
   #- group: Basics
   ##  expanded: false
   #  pages:

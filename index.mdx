@@ -19,6 +19,7 @@ import {
 } from '@redocly/developer-portal/ui';
 
 import icon1 from './images/icon1.png';
+import bground from './images/screen-code.jpg'
 import launchFastIcon from './images/launch-fast.svg';
 import icon3 from './images/icon3.png';
 import bookManagementIcon from './images/book-management.svg';
@@ -31,15 +32,15 @@ export default LandingLayout;
   <H1>Elastic Path Commerce Cloud</H1>
   <H2>Documentation and Developers Guide</H2>
   <Flex p={20} justifyContent="center">
-    {/* <Button size="xlarge" to="https://app.redoc.ly">
-      Redocly app
-    </Button> */}
-     <Button variant="outlined" size="xlarge" to="docs/index.md">
+    <Button variant="outlined" size="xlarge" to="docs">
+      Another Link
+    </Button>
+     <Button size="xlarge" to="docs/index.md">
       Get started
     </Button>
-    {/* <Button variant="outlined" size="xlarge" to="https://redoc.ly/docs">
-      Docs
-    </Button> */}
+    <Button variant="outlined" size="xlarge" to="https://elasticpath.com">
+      Our Website
+    </Button>
   </Flex>
 </Jumbotron>
 <Box my={25}>
@@ -47,50 +48,41 @@ export default LandingLayout;
     Learn More About <Emphasis> Elastic Path Commerce Cloud </Emphasis>
   </SectionHeader>
   <FlexSection justifyContent="space-around" flexWrap="wrap">
-    <ThinTile to="docs/index.md" icon={icon1} header="Rock">
-        Lorem ipsum dolor sit amet, pri putent oportere quaerendum in, ea mea justo invenire
-        aliquando. Usu modo suavitate ea. Et sed labitur epicurei adipiscing. Nibh zril labitur
-        an usu.Lorem ipsum dolor sit amet, pri putent oportere quaerendum in, ea mea justo
-        invenire aliquando. Usu modo suavitate ea. Et sed labitur epicurei adipiscing. Nibh zril
-        labitur an usu.Lorem ipsum dolor sit amet, pri putent oportere quaerendum in, ea mea
-        justo invenire aliquando. Usu modo suavitate ea. Et sed labitur epicurei adipiscing.
+    <ThinTile to="docs/index.md" icon={icon1} header="Reference Docs">
+        Learn everything you've ever wanted to know but were afraid to ask.
     </ThinTile>
-    <ThinTile to="docs/index.md" icon={launchFastIcon} header="Paper">
-        Lorem ipsum dolor sit amet, pri putent oportere quaerendum in, ea mea justo invenire
-        aliquando. Usu modo suavitate ea. Et sed labitur epicurei adipiscing. Nibh zril labitur
-        an usu.
+    <ThinTile to="docs/index.md" icon={launchFastIcon} header="Developer Tutorials">
+        Dig into our Developer Tutorials
     </ThinTile>
-    <ThinTile to="contact.mdx" icon={icon3} header="Scissors">
-        Lorem ipsum dolor sit amet, pri putent oportere quaerendum in, ea mea justo invenire
-        aliquando. Usu modo suavitate ea. Et sed labitur epicurei adipiscing. Nibh zril labitur
-        an usu.
+    <ThinTile to="contact.mdx" icon={icon3} header="Learning Management">
+        Lots of ways to learn, become a Certified User
     </ThinTile>
   </FlexSection>
-  {/* <Jumbotron parallaxEffect bgImage={icon1}>
+  <Jumbotron parallaxEffect bgImage={bground}>
     <H1>Tutorials</H1>
-    <H2>Get setup faster...</H2>
-  </Jumbotron> */}
+    <H2>Product Lead Growth Here</H2>
+  </Jumbotron>
   <SectionHeader>
     <Emphasis>Need help? </Emphasis>
     Try our training exercises.
   </SectionHeader>
   <FlexSection justifyContent="space-around" flexWrap="wrap">
-    <WideTile to="docs/index.md" header="Rock">
+    <WideTile to="docs/index.md" header="Publish A Catalog">
         Lorem ipsum dolor sit amet, pri putent oportere quaerendum in, ea mea justo invenire
         aliquando. Usu modo suavitate ea. Et sed labitur epicurei adipiscing. Nibh zril labitur
         an usu.
     </WideTile>
-    <WideTile to="docs/index.md" header="Paper">
+    <WideTile to="docs/index.md" header="Try Our Reference Storefront">
         Lorem ipsum dolor sit amet, pri putent oportere quaerendum in, ea mea justo invenire
         aliquando. Usu modo suavitate ea. Et sed labitur epicurei adipiscing. Nibh zril labitur
         an usu.
     </WideTile>
-    <WideTile to="docs/index.md" header="Scissors">
+    <WideTile to="docs/index.md" header="Manage Carts">
         Lorem ipsum dolor sit amet, pri putent oportere quaerendum in, ea mea justo invenire
         aliquando. Usu modo suavitate ea. Et sed labitur epicurei adipiscing. Nibh zril labitur
         an usu.
     </WideTile>
-    <WideTile to="docs/index.md" header="Go">
+    <WideTile to="docs/index.md" header="Manage Orders">
         Lorem ipsum dolor sit amet, pri putent oportere quaerendum in, ea mea justo invenire
         aliquando. Usu modo suavitate ea. Et sed labitur epicurei adipiscing. Nibh zril labitur
         an usu.
